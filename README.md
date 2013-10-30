@@ -23,15 +23,25 @@ Or install it yourself as:
 
 ## Usage
 
-    Sqoot.configure do |config|
-      # config.public_api_key = 'YOUR PUBLIC API KEY'
-      # config.private_api_key = 'YOUR PRIVATE API KEY'
-      # config.base_api_url = 'https://api.sqoot.com'
-      # config.authentication_method = :header
-      # config.read_timeout = 20
-    end
+#### General configuration options
 
-    sqoot = Sqoot::Client.new
+    public_api_key        # YOUR PUBLIC API KEY
+    private_api_key       # YOUR PRIVATE API KEY
+    base_api_url          # 'https://api.sqoot.com' by default
+    authentication_method # :header by default
+    read_timeout          # 20 by default
+
+There’s a handy generator that generates the default configuration file into config/initializers directory. Run the following generator command, then edit the generated file.
+
+    rails g rsqoot:config
+
+You can also change your configuration in your instance, such as below:
+
+    sqoot ||= RSqoot::Client.new(public_api_key: "YOUR PUBLIC API KEY")
+
+#### Basic Usages
+
+    sqoot ||= RSqoot::Client.new
 
     sqoot.deals
     #=> returns a list of deals
