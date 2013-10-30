@@ -3,7 +3,7 @@ $:.push File.expand_path("../lib", __FILE__)
 require 'rsqoot/version'
 
 Gem::Specification.new do |s|
-  s.name             = "rqoot"
+  s.name             = "rsqoot"
   s.version          = RSqoot::VERSION.dup
   s.platform         = Gem::Platform::RUBY
   s.licenses         = ['MIT']
