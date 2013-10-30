@@ -54,9 +54,10 @@ module RSqoot
     #
     # @return [String]
     def options_parser(options = {})
-      options.map do |key, value|
+      query = options.map do |key, value|
         [key, value].map(&:to_s).join('=')
       end.join('&')
+      URI.encode query
     end
 
   end

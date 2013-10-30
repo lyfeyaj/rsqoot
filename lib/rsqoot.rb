@@ -18,8 +18,8 @@ module RSqoot
     def configure
       load_defaults
       yield self
-      raise "You must add your own public api key to initializer ." if self.public_api_key.empty?
-      raise "You must add your own private api key to initializer ." if self.private_api_key.empty?
+      raise "You must add your own public api key to initializer ." if self.public_api_key.nil?
+      raise "You must add your own private api key to initializer ." if self.private_api_key.nil?
       raise "Authentication method must be :header or :parameter ." if !AUTHENTICATION_METHODS.include? self.authentication_method
       true
     end
