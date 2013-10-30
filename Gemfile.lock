@@ -1,0 +1,18 @@
+PATH
+  remote: .
+  specs:
+    rsqoot (0.1.1)
+      hashie (~> 2.0.0)
+      json (~> 1.7.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    hashie (2.0.5)
+    json (1.7.7)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  rsqoot!

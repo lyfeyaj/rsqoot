@@ -1,5 +1,12 @@
 require "rsqoot/client"
 
+# load Rails/Railtie
+begin
+  require 'rails'
+rescue LoadError
+  #do nothing
+end
+
 module RSqoot
 
   class << self
