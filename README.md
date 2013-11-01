@@ -46,18 +46,18 @@ You can also change your configuration in your instance, such as below:
     sqoot.deals
     #=> returns a list of deals
 
-    sqoot.deals(:location => 'Chicago')
+    sqoot.deals(location: 'Chicago')
 
-    sqoot.deals(:location => 'Chicago', :per_page => 10)
+    sqoot.deals(location: 'Chicago', per_page: 10)
 
-    sqoot.deals(:location => 'Chicago', :per_page => 10, :categories => 'health-beauty', :page => 2)
+    sqoot.deals(location: 'Chicago', per_page: 10, categories: 'health-beauty', page: 2)
 
-    sqoot.deals(:price_at_least => 10, :order => commission)
+    sqoot.deals(price_at_least: 10, order: :commission_desc)
 
-    sqoot.deal_impression(1555288, geometry: '250x250C')
-    # => return a image url which size is 250x250
+    sqoot.impression(1555288, geometry: '250x250C')
+    # => return deal_id 1555288's image url which size is 250x250
 
-    sqoot.deal_click(1555288)
+    sqoot.deal(1555288).url
     # => return a click url which will redirect to another url
 
     sqoot.providers
@@ -66,14 +66,24 @@ You can also change your configuration in your instance, such as below:
     sqoot.commissions
     # => returns current month commissions
 
-    sqoot.commissions(:to => '2012-01-01', :from => '2012-01-20')
+    sqoot.commissions(to: '2012-01-01', from: '2012-01-20')
     # => returns commissions using date_range :to & :from
 
     sqoot.clicks
     # => returns real-time clicks from the event request limit of 1000
 
-    sqoot.clicks(:to => '2012-01-01', :from => '2012-01-20')
+    sqoot.clicks(to: '2012-01-01', from: '2012-01-20')
     # => returns clicks using date_range :to & :from
+
+#### Auto Cache
+
+Please notice that each query with above methods will cache the result except for sqoot.clicks
+
+If you want to fetch the newest records each time, you can do as below:
+
+    sqoot.deals(location: 'Chicago', time: Time.now)
+
+By this, it will update the cache by each query.
 
 ## Contributing
 
