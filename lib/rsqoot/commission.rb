@@ -8,7 +8,11 @@ module RSqoot
     #
     # @return [Hashie::Mash]
     def commissions(options={})
-      get('commissions', options).commissions
+      if commissions_not_latest?(options)
+        @rsqoot_commissions = get('commissions', options)
+        @rsqoot_commissions = @rsqoot_commissions.commissions if @rsqoot_commissions
+      end
+      @rsqoot_commissions
     end
 
   end

@@ -1,7 +1,13 @@
 module RSqoot
   module Helper
     def self.included(base)
-      ['deals', 'deal', 'categories', 'providers', 'merchant'].each do |name|
+      [ 'deals',
+        'deal',
+        'categories',
+        'providers',
+        'merchant',
+        'commissions',
+        'clicks' ].each do |name|
         attr_reader ('rsqoot_' + name).to_sym
         attr_accessor (name + '_options').to_sym
         base.send :define_method, (name + '_not_latest?').to_sym do |opt|

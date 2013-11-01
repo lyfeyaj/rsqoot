@@ -77,7 +77,7 @@ You can also change your configuration in your instance, such as below:
 
 #### Auto Cache
 
-Please notice that each query with above methods will cache the result except for sqoot.clicks
+Please notice that each query with above methods will automaticlly cache the result
 
 If you want to fetch the newest records each time, you can do as below:
 
