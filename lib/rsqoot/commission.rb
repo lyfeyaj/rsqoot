@@ -8,7 +8,7 @@ module RSqoot
     #
     # @return [Hashie::Mash]
     def commissions(options={})
-      get('commissions', options)
+      get('commissions', options).commissions
     end
 
   end

@@ -7,7 +7,11 @@ module RSqoot
     # @param [String] namespace (One of the supported namespaces. Factual, Foursquare, Facebook, Google, CitySearch, Yelp.)
 
     def merchant(id, options={})
-      get("merchants/#{id}", options)
+      if merchant_not_latest?(id)
+        @rsqoot_merchant = get("merchants/#{id}", options)
+        @rsqoot_merchant = @rsqoot_merchant.merchant if @rsqoot_merchant
+      end
+      @rsqoot_merchant
     end
   end
 end

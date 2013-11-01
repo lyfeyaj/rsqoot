@@ -5,7 +5,11 @@ module RSqoot
     #
     # @return [Hashie::Mash] category list
     def categories(options={})
-      get('categories', options)
+      if categories_not_latest?(options)
+        @rsqoot_categories = get('categories', options)
+        @rsqoot_categories = @rsqoot_categories.categories if @rsqoot_categories
+      end
+      @rsqoot_categories
     end
   end
 end

@@ -4,7 +4,11 @@ module RSqoot
     #
     # @return [Hashie::Mash]
     def providers(options={})
-      get('providers', options)
+      if providers_not_latest?(options)
+        @rsqoot_providers = get('providers', options)
+        @rsqoot_providers = @rsqoot_providers.providers if @rsqoot_providers
+      end
+      @rsqoot_providers
     end
   end
 end

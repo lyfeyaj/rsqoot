@@ -1,3 +1,4 @@
+require "rsqoot/helper"
 require "rsqoot/merchant"
 require "rsqoot/category"
 require "rsqoot/provider"
@@ -8,6 +9,7 @@ require "rsqoot/request"
 
 module RSqoot
   class Client
+    include Helper
     include Category
     include Click
     include Commission

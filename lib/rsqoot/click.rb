@@ -8,7 +8,7 @@ module RSqoot
     #
     # @return [Hashie::Mash]
     def clicks(options={})
-      get('clicks', options)
+      get('clicks', options).clicks
     end
   end
 end
