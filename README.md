@@ -85,6 +85,11 @@ If you want to fetch the newest records each time, you can do as below:
 
 By this, it will update the cache by each query.
 
+## TODO
+
++ Add auto-caching in config file
++ Add cache expire time in config file
+
 ## Contributing
 
 1. Fork it
