@@ -34,7 +34,23 @@ module RSqoot
       url_generator("deals/#{deal_id}/image", options, require_key = true).first.to_s
     end
 
+    def total_sqoot_deals(options = {})
+      @total_deals ||= []
+      @cached_pages ||= []
+      page = options[:page] || 1
+      check_query_change options
+      if !page_cached? page
+        @total_deals += deals(options)
+        @total_deals.uniq!
+        @cached_pages << page.to_s
+        @cached_pages.uniq!
+      end
+      @total_deals
+    end
+
     private
+
+    attr_reader :cached_pages, :total_deals, :last_deals_query
 
     def uniq_deals(deals = [])
       titles = deals.map(&:title).uniq
@@ -45,6 +61,20 @@ module RSqoot
           end
         end.compact.last
       end.flatten
+    end
+
+    def check_query_change(options = {})
+      @last_deals_query ||= ''
+      current_query = options[:query].to_s + options[:category_slugs].to_s
+      if @last_deals_query != current_query
+        @last_deals_query = current_query
+        @total_deals = []
+        @cached_pages = []
+      end
+    end
+
+    def page_cached?(page = 1)
+      cached_pages.include? page.to_s
     end
 
   end
