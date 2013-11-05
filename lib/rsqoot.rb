@@ -1,16 +1,10 @@
+require "active_support/core_ext"
 require "rsqoot/client"
-
-# load Rails/Railtie
-begin
-  require 'rails'
-rescue LoadError
-  #do nothing
-end
 
 module RSqoot
 
   class << self
-    attr_accessor :public_api_key, :private_api_key, :base_api_url, :authentication_method, :read_timeout
+    attr_accessor :public_api_key, :private_api_key, :base_api_url, :authentication_method, :read_timeout, :expired_in
 
     # Configure default credentials easily
     #
@@ -28,6 +22,7 @@ module RSqoot
       self.base_api_url ||= "https://api.sqoot.com"
       self.authentication_method = :header
       self.read_timeout = 60
+      self.expired_in = 1.hour
     end
 
     private

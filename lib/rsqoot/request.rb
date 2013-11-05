@@ -9,7 +9,9 @@ module RSqoot
       uri, headers = url_generator(path, opts)
       begin
         json = JSON.parse uri.open(headers).read
-        ::Hashie::Mash.new json
+        result = ::Hashie::Mash.new json
+        @query_options = result.query
+        result
       rescue
         nil
       end

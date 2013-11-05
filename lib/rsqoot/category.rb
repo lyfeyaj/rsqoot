@@ -5,11 +5,14 @@ module RSqoot
     #
     # @return [Hashie::Mash] category list
     def categories(options={})
+      updated_by options
+      query = options.delete(:query)
       if categories_not_latest?(options)
         @rsqoot_categories = get('categories', options)
-        @rsqoot_categories = @rsqoot_categories.categories if @rsqoot_categories
+        @rsqoot_categories = @rsqoot_categories.categories.map(&:category) if @rsqoot_categories
       end
-      @rsqoot_categories
+      query.present? ? query_categories(query) : @rsqoot_categories
     end
+
   end
 end

@@ -4,11 +4,14 @@ module RSqoot
     #
     # @return [Hashie::Mash]
     def providers(options={})
+      updated_by options
+      query = options.delete(:query)
       if providers_not_latest?(options)
         @rsqoot_providers = get('providers', options)
-        @rsqoot_providers = @rsqoot_providers.providers if @rsqoot_providers
+        @rsqoot_providers = @rsqoot_providers.providers.map(&:provider) if @rsqoot_providers
       end
-      @rsqoot_providers
+      query.present? ? query_providers(query) : @rsqoot_providers
     end
+
   end
 end

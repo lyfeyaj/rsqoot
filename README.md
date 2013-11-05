@@ -30,6 +30,7 @@ Or install it yourself as:
     base_api_url          # 'https://api.sqoot.com' by default
     authentication_method # :header by default
     read_timeout          # 20 by default
+    expired_in            # 1.hour by default
 
 There’s a handy generator that generates the default configuration file into config/initializers directory. Run the following generator command, then edit the generated file.
 
@@ -45,6 +46,8 @@ You can also change your configuration in your instance, such as below:
 
     sqoot.deals
     #=> returns a list of deals
+
+    sqoot.deals(query: 'travel')
 
     sqoot.deals(location: 'Chicago')
 
@@ -62,6 +65,15 @@ You can also change your configuration in your instance, such as below:
 
     sqoot.providers
     # => returns a list of providers
+
+    sqoot.providers(query: 'Groupon')
+
+    sqoot.categories
+    # => returns a list of categories
+
+    sqoot.categories(query: 'home')
+    sqoot.categories(query: 'home&health')
+    sqoot.categories(query: 'home,health')
 
     sqoot.commissions
     # => returns current month commissions
@@ -81,7 +93,7 @@ Please notice that each query with above methods will automaticlly cache the res
 
 If you want to fetch the newest records each time, you can do as below:
 
-    sqoot.deals(location: 'Chicago', time: Time.now)
+    sqoot.deals(location: 'Chicago', expired_in: 1.second)
 
 By this, it will update the cache by each query.
 
