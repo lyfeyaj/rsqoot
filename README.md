@@ -1,9 +1,7 @@
 RSqoot
 ======
 
-A Ruby Wrapper For Sqoot API V2
-
-Wrapper for [Sqoot](http://www.sqoot.com) [API V2](http://docs.sqoot.com/v2/overview.html).
+A Ruby Wrapper for [Sqoot](http://www.sqoot.com) [API V2](http://docs.sqoot.com/v2/overview.html).
 
 To get the list of available parameters kindly check out [API V2](http://docs.sqoot.com/v2/overview.html)
 
@@ -96,11 +94,6 @@ If you want to fetch the newest records each time, you can do as below:
     sqoot.deals(location: 'Chicago', expired_in: 1.second)
 
 By this, it will update the cache by each query.
-
-## TODO
-
-+ Add auto-caching in config file
-+ Add cache expire time in config file
 
 ## Contributing
 
