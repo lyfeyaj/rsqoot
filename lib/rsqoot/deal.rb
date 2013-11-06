@@ -1,6 +1,5 @@
 module RSqoot
   module Deal
-
     # Retrieve a list of deals based on the following parameters
     #
     # @param [String] query (Search deals by title, description, fine print, merchant name, provider, and category.)
@@ -10,7 +9,7 @@ module RSqoot
     # @param [Integer] per_page (Number of results to return at once. Defaults to 10.)
     #
     def deals(options={})
-      updated_by options
+      options = update_by_expire_time options
       if deals_not_latest?(options)
         uniq = !!options.delete(:uniq)
         @rsqoot_deals = get('deals', options) || []
@@ -23,7 +22,7 @@ module RSqoot
     # Retrieve a deal by id
     #
     def deal(id, options={})
-      updated_by options
+      options = update_by_expire_time options
       if deal_not_latest?(id)
         @rsqoot_deal = get("deals/#{id}", options)
         @rsqoot_deal = @rsqoot_deal.deal if @rsqoot_deal
@@ -74,12 +73,15 @@ module RSqoot
     # else it will do nothing
     #
     def check_query_change(options = {})
+      options = update_by_expire_time options
       @last_deals_query ||= ''
       current_query = options[:query].to_s
       current_query += options[:category_slugs].to_s
       current_query += options[:location].to_s
       current_query += options[:radius].to_s
       current_query += options[:online].to_s
+      current_query += options[:expired_in].to_s
+      current_query += options[:per_page].to_s
       if @last_deals_query != current_query
         @last_deals_query = current_query
         @total_deals  = []

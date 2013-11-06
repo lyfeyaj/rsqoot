@@ -5,7 +5,7 @@ module RSqoot
     #
     # @return [Hashie::Mash] category list
     def categories(options={})
-      updated_by options
+      options = update_by_expire_time options
       query = options.delete(:query)
       if categories_not_latest?(options)
         @rsqoot_categories = get('categories', options)

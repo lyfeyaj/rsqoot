@@ -6,3 +6,5 @@ RSqoot.configure do |config|
   # config.read_timeout = 20
   # config.expired_in = 1.hour
 end
+
+SqootClient ||= RSqoot::Client.new

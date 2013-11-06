@@ -4,7 +4,7 @@ module RSqoot
     #
     # @return [Hashie::Mash]
     def providers(options={})
-      updated_by options
+      options = update_by_expire_time options
       query = options.delete(:query)
       if providers_not_latest?(options)
         @rsqoot_providers = get('providers', options)

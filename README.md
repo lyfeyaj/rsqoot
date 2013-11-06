@@ -34,7 +34,11 @@ There’s a handy generator that generates the default configuration file into c
 
     rails g rsqoot:config
 
-You can also change your configuration in your instance, such as below:
+Then, you should be able to use `SqootClient` to search deals. For example:
+
+    SqootClient.deals(query: 'Home')
+
+You can also change your configuration in your own instance, such as below:
 
     sqoot ||= RSqoot::Client.new(public_api_key: "YOUR PUBLIC API KEY", private_api_key: 'YOUR PRIVATE API KEY')
 

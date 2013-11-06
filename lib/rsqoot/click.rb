@@ -8,7 +8,7 @@ module RSqoot
     #
     # @return [Hashie::Mash]
     def clicks(options={})
-      updated_by options
+      options = update_by_expire_time options
       if clicks_not_latest?(options)
         @rsqoot_clicks = get('clicks', options)
         @rsqoot_clicks = @rsqoot_clicks.clicks if @rsqoot_clicks
