@@ -1,7 +1,7 @@
 RSqoot
 ======
 
-A Ruby Wrapper for [Sqoot](http://www.sqoot.com) [API V2](http://docs.sqoot.com/v2/overview.html).
+A Ruby Wrapper for [Sqoot](http://www.sqoot.com) [API V2](http://docs.sqoot.com/v2/overview.html). With Auto-caching for all APIS, and Auto-increment for deals.
 
 To get the list of available parameters kindly check out [API V2](http://docs.sqoot.com/v2/overview.html)
 
@@ -36,7 +36,7 @@ There’s a handy generator that generates the default configuration file into c
 
 You can also change your configuration in your instance, such as below:
 
-    sqoot ||= RSqoot::Client.new(public_api_key: "YOUR PUBLIC API KEY")
+    sqoot ||= RSqoot::Client.new(public_api_key: "YOUR PUBLIC API KEY", private_api_key: 'YOUR PRIVATE API KEY')
 
 #### Basic Usages
 
@@ -94,6 +94,20 @@ If you want to fetch the newest records each time, you can do as below:
     sqoot.deals(location: 'Chicago', expired_in: 1.second)
 
 By this, it will update the cache by each query.
+
+#### Auto increment for deals
+
+    sqoot.total_sqoot_deals(query: 'Home', page: 2, category_slugs: 'US')
+    # For this method, it will cache all the pages for current query options, the more you query the more it will store until reach the end.
+
+    # For example:
+    sqoot.total_sqoot_deals(query: 'Home', page: 1, per_page: 20, category_slugs: 'US').count
+    # => 20 records
+    sqoot.total_sqoot_deals(query: 'Home', page: 2, per_page: 20, category_slugs: 'US').count
+    # => 40 records
+
+    # But once you change your query options, it will re-cache the records.
+
 
 ## Contributing
 

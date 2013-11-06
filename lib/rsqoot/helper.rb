@@ -1,6 +1,8 @@
 module RSqoot
   module Helper
 
+    # Add auto-cache helper methods, instances to save the latest query
+    #
     def self.included(base)
       [ 'deals',
         'deal',
@@ -18,6 +20,11 @@ module RSqoot
         end
       end
 
+      # Add categories and providers query helpers
+      # Search categories and providers will be very easy
+      # Such as: query_categories('home&_visiter,friends')
+      # => search records like: home, visiter, friends
+      #
       [ 'categories',
         'providers' ].each do |name|
         base.send :define_method, ('query_' + name).to_sym do |q|
@@ -34,6 +41,9 @@ module RSqoot
       end
     end
 
+    # Add expired time functionality to this gem
+    # By default is 1.hour, and can be replaced anywhere
+    #
     def updated_by(options = {})
       @expired_in = options[:expired_in] if options[:expired_in].present?
       time = Time.now.to_i / expired_in.to_i

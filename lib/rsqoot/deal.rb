@@ -8,6 +8,7 @@ module RSqoot
     # @param [Integer] radius (Measured in miles. Defaults to 10.)
     # @param [Integer] page (Which page of result to return. Default to 1.)
     # @param [Integer] per_page (Number of results to return at once. Defaults to 10.)
+    #
     def deals(options={})
       updated_by options
       if deals_not_latest?(options)
@@ -34,8 +35,9 @@ module RSqoot
       url_generator("deals/#{deal_id}/image", options, require_key = true).first.to_s
     end
 
+    # Auto Increment for deals query.
     def total_sqoot_deals(options = {})
-      @total_deals ||= []
+      @total_deals  ||= []
       @cached_pages ||= []
       page = options[:page] || 1
       check_query_change options
@@ -52,6 +54,10 @@ module RSqoot
 
     attr_reader :cached_pages, :total_deals, :last_deals_query
 
+    # Uniq deals from Sqoot, because there are some many duplicated deals
+    # with different ids
+    # Simplely distinguish them by their titles
+    #
     def uniq_deals(deals = [])
       titles = deals.map(&:title).uniq
       titles.map do |title|
@@ -63,16 +69,26 @@ module RSqoot
       end.flatten
     end
 
+    # A status checker for method :total_sqoot_deals
+    # If the query parameters changed, this will reset the cache
+    # else it will do nothing
+    #
     def check_query_change(options = {})
       @last_deals_query ||= ''
-      current_query = options[:query].to_s + options[:category_slugs].to_s
+      current_query = options[:query].to_s
+      current_query += options[:category_slugs].to_s
+      current_query += options[:location].to_s
+      current_query += options[:radius].to_s
+      current_query += options[:online].to_s
       if @last_deals_query != current_query
         @last_deals_query = current_query
-        @total_deals = []
+        @total_deals  = []
         @cached_pages = []
       end
     end
 
+    # Helper methods to detect which page is cached
+    #
     def page_cached?(page = 1)
       cached_pages.include? page.to_s
     end
