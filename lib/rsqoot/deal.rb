@@ -12,7 +12,7 @@ module RSqoot
       options = update_by_expire_time options
       if deals_not_latest?(options)
         uniq = !!options.delete(:uniq)
-        @rsqoot_deals = get('deals', options) || []
+        @rsqoot_deals = get('deals', options, SqootDeal) || []
         @rsqoot_deals = @rsqoot_deals.deals.map(&:deal) if !@rsqoot_deals.empty?
         @rsqoot_deals = uniq_deals(@rsqoot_deals) if uniq
       end
@@ -24,7 +24,7 @@ module RSqoot
     def deal(id, options={})
       options = update_by_expire_time options
       if deal_not_latest?(id)
-        @rsqoot_deal = get("deals/#{id}", options)
+        @rsqoot_deal = get("deals/#{id}", options, SqootDeal)
         @rsqoot_deal = @rsqoot_deal.deal if @rsqoot_deal
       end
       @rsqoot_deal

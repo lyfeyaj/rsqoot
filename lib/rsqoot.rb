@@ -21,7 +21,7 @@ module RSqoot
     def load_defaults
       self.base_api_url ||= "https://api.sqoot.com"
       self.authentication_method = :header
-      self.read_timeout = 60
+      self.read_timeout = 60.seconds
       self.expired_in = 1.hour
     end
 

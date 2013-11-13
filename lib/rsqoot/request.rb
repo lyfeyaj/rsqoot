@@ -1,15 +1,14 @@
 require 'open-uri'
-require 'hashie/mash'
 require 'json'
 
 module RSqoot
   module Request
 
-    def get(path, opts = {})
+    def get(path, opts = {}, wrapper = ::Hashie::Mash)
       uri, headers = url_generator(path, opts)
       begin
         json = JSON.parse uri.open(headers).read
-        result = ::Hashie::Mash.new json
+        result = wrapper.new json
         @query_options = result.query
         result
       rescue

@@ -9,7 +9,7 @@ module RSqoot
     def merchant(id, options={})
       options = update_by_expire_time options
       if merchant_not_latest?(id)
-        @rsqoot_merchant = get("merchants/#{id}", options)
+        @rsqoot_merchant = get("merchants/#{id}", options, SqootMerchant)
         @rsqoot_merchant = @rsqoot_merchant.merchant if @rsqoot_merchant
       end
       @rsqoot_merchant

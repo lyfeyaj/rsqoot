@@ -1,3 +1,4 @@
+require 'hashie/mash'
 module RSqoot
   module Helper
 
@@ -38,6 +39,17 @@ module RSqoot
           end
         end
         base.class_eval { private ('query_' + name).to_sym }
+      end
+
+      # Add Wrappers: Deal, Category, Commission, Merchant, Provider, Click
+      [ 'SqootDeal',
+        'SqootCategory',
+        'SqootCommission',
+        'SqootMerchant',
+        'SqootProvider',
+        'SqootClick'].each do |class_name|
+        new_class = Class.new(::Hashie::Mash)
+        RSqoot.const_set class_name, new_class
       end
     end
 

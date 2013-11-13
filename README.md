@@ -29,7 +29,7 @@ Or install it yourself as:
     private_api_key       # YOUR PRIVATE API KEY
     base_api_url          # 'https://api.sqoot.com' by default
     authentication_method # :header by default
-    read_timeout          # 20 by default
+    read_timeout          # 60.seconds by default
     expired_in            # 1.hour by default
 
 There’s a handy generator that generates the default configuration file into config/initializers directory. Run the following generator command, then edit the generated file.
