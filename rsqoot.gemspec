@@ -18,8 +18,8 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files = ['README.md']
   s.require_paths    = ['lib']
 
-  s.add_dependency "hashie", "~> 2.0.0"
-  s.add_dependency "json", "~> 1.7.0"
+  s.add_dependency "hashie", ">= 2.0.0"
+  s.add_dependency "json", ">= 1.6.0"
   s.add_dependency "activesupport", ">= 3.0.0"
 
 end
