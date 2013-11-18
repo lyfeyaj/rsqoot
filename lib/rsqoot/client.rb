@@ -6,6 +6,7 @@ require "rsqoot/commission"
 require "rsqoot/click"
 require "rsqoot/deal"
 require "rsqoot/request"
+require "rsqoot/logger"
 
 module RSqoot
   class Client
@@ -17,6 +18,7 @@ module RSqoot
     include Merchant
     include Provider
     include Request
+    include Logger
 
     attr_reader :public_api_key, :private_api_key, :base_api_url, :authentication_method, :read_timeout, :query_options, :expired_in
 

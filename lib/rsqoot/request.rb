@@ -10,8 +10,10 @@ module RSqoot
         json = JSON.parse uri.open(headers).read
         result = wrapper.new json
         @query_options = result.query
+        logger({uri: uri, records: result})
         result
-      rescue
+      rescue => e
+        logger({uri: uri, records: [], error: e})
         nil
       end
     end
