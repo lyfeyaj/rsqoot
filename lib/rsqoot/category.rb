@@ -11,7 +11,9 @@ module RSqoot
         @rsqoot_categories = get('categories', options, SqootCategory)
         @rsqoot_categories = @rsqoot_categories.categories.map(&:category) if @rsqoot_categories
       end
-      query.present? ? query_categories(query) : @rsqoot_categories
+      result = query.present? ? query_categories(query) : @rsqoot_categories
+      logger({uri: sqoot_query_uri, records: result, type: 'categories', opts: options})
+      result
     end
 
   end

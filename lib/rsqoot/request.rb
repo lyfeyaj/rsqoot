@@ -10,10 +10,9 @@ module RSqoot
         json = JSON.parse uri.open(headers).read
         result = wrapper.new json
         @query_options = result.query
-        logger({uri: uri, records: result})
         result
       rescue => e
-        logger({uri: uri, records: [], error: e})
+        logger({error: e})
         nil
       end
     end
@@ -32,6 +31,7 @@ module RSqoot
         query = query + "&api_key=#{api_key(endpoint)}"
       end
       uri.query = query
+      @sqoot_query_uri = uri
       [uri, headers]
     end
 

@@ -20,7 +20,7 @@ module RSqoot
     include Request
     include Logger
 
-    attr_reader :public_api_key, :private_api_key, :base_api_url, :authentication_method, :read_timeout, :query_options, :expired_in
+    attr_reader :public_api_key, :private_api_key, :base_api_url, :authentication_method, :read_timeout, :query_options, :expired_in, :sqoot_query_uri
 
     def initialize(options={})
       @public_api_key        = options[:public_api_key]        || RSqoot.public_api_key
