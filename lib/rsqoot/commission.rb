@@ -13,6 +13,7 @@ module RSqoot
         @rsqoot_commissions = get('commissions', options, SqootCommission)
         @rsqoot_commissions = @rsqoot_commissions.commissions if @rsqoot_commissions
       end
+      logger({uri: sqoot_query_uri, records: @rsqoot_commissions, type: 'commissions', opts: options})
       @rsqoot_commissions
     end
 

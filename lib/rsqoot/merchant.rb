@@ -12,6 +12,7 @@ module RSqoot
         @rsqoot_merchant = get("merchants/#{id}", options, SqootMerchant)
         @rsqoot_merchant = @rsqoot_merchant.merchant if @rsqoot_merchant
       end
+      logger({uri: sqoot_query_uri, records: [@rsqoot_merchant], type: 'merchants', opts: options})
       @rsqoot_merchant
     end
 

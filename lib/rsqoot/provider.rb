@@ -10,7 +10,9 @@ module RSqoot
         @rsqoot_providers = get('providers', options, SqootProvider)
         @rsqoot_providers = @rsqoot_providers.providers.map(&:provider) if @rsqoot_providers
       end
-      query.present? ? query_providers(query) : @rsqoot_providers
+      result = query.present? ? query_providers(query) : @rsqoot_providers
+      logger({uri: sqoot_query_uri, records: result, type: 'providers', opts: options})
+      result
     end
 
   end

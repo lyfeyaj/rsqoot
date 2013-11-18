@@ -16,6 +16,7 @@ module RSqoot
         @rsqoot_deals = @rsqoot_deals.deals.map(&:deal) if !@rsqoot_deals.empty?
         @rsqoot_deals = uniq_deals(@rsqoot_deals) if uniq
       end
+      logger({uri: sqoot_query_uri, records: @rsqoot_deals, type: 'deals', opts: options})
       @rsqoot_deals
     end
 
@@ -27,6 +28,7 @@ module RSqoot
         @rsqoot_deal = get("deals/#{id}", options, SqootDeal)
         @rsqoot_deal = @rsqoot_deal.deal if @rsqoot_deal
       end
+      logger({uri: sqoot_query_uri, records: [@rsqoot_deal], type: 'deal', opts: options})
       @rsqoot_deal
     end
 

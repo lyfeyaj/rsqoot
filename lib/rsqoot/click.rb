@@ -13,6 +13,7 @@ module RSqoot
         @rsqoot_clicks = get('clicks', options, SqootClick)
         @rsqoot_clicks = @rsqoot_clicks.clicks if @rsqoot_clicks
       end
+      logger({uri: sqoot_query_uri, records: @rsqoot_clicks, type: 'clicks', opts: options})
       @rsqoot_clicks
     end
 
