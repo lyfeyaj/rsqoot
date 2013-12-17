@@ -4,6 +4,9 @@ require 'json'
 module RSqoot
   module Request
 
+    # Get method, use by all other API qeury methods, fetch records
+    # from the Sqoot API V2 url, and provide wrapper functionality
+    #
     def get(path, opts = {}, wrapper = ::Hashie::Mash)
       uri, headers = url_generator(path, opts)
       begin
@@ -17,6 +20,9 @@ module RSqoot
       end
     end
 
+    # Generate valid Sqoot API V2 url and provide two different way of
+    # authentication: :header, :parameter
+    #
     def url_generator(path, opts = {}, require_key = false)
       uri      = URI.parse base_api_url
       headers  = {read_timeout: read_timeout}
@@ -37,14 +43,19 @@ module RSqoot
 
     private
 
+    # Endpoints that needs private key
+    #
     def private_endpoints
       %w(clicks commissions)
     end
 
+    # Endpoints that both public or private key will work
+    #
     def public_endpoints
       %w(categories deals merchants providers)
     end
 
+    # Decide which api key should be used: private, public
     def api_key(endpoint='')
       if private_endpoints.include? endpoint
         private_api_key
