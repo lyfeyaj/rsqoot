@@ -32,7 +32,7 @@ module RSqoot
           queries = q.downcase.scan(/[A-Za-z]+|\d+/)
           if queries.present?
             queries.map do |q|
-              instance_variable_get('@rsqoot_'+name).dup.keep_if do |c|
+              instance_variable_get('@rsqoot_' + name).dup.keep_if do |c|
                 c.slug =~ Regexp.new(q)
               end
             end.flatten.compact.uniq
@@ -42,6 +42,8 @@ module RSqoot
       end
 
       # Add Wrappers: Deal, Category, Commission, Merchant, Provider, Click
+      # All records should return as RSqoot::Sqoot* object
+      #
       [ 'SqootDeal',
         'SqootCategory',
         'SqootCommission',

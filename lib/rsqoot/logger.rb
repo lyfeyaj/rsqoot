@@ -1,5 +1,10 @@
 module RSqoot
   module Logger
+
+    # Add logger support, easy for log monitor when running your app
+    # Output errors and valid records count
+    # TODO add color support
+    #
     def logger(options = {records: [], uri: '', error: '', type: '', opts: {}})
       records = options[:records].nil? ? [] : options[:records]
       error   = options[:error]
