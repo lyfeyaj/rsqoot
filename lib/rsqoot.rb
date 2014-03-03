@@ -15,6 +15,7 @@ module RSqoot
       raise "You must add your own public api key to initializer ." if self.public_api_key.nil?
       raise "You must add your own private api key to initializer ." if self.private_api_key.nil?
       raise "Authentication method must be :header or :parameter ." if !AUTHENTICATION_METHODS.include? self.authentication_method
+      SqootClient.reload!
       true
     end
 
@@ -31,4 +32,11 @@ module RSqoot
 
   end
 
+end
+
+begin
+  RSqoot.load_defaults
+  SqootClient ||= RSqoot::Client.instance
+rescue => e
+  raise e
 end

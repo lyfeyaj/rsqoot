@@ -45,56 +45,54 @@ SqootClient.deals(query: 'Home')
 You can also change your configuration in your own instance, such as below:
 
 ```ruby
-sqoot ||= RSqoot::Client.new(public_api_key: "YOUR PUBLIC API KEY", private_api_key: 'YOUR PRIVATE API KEY')
+SqootClient.reload!(public_api_key: "YOUR PUBLIC API KEY", private_api_key: 'YOUR PRIVATE API KEY')
 ```
 
 #### Basic Usages
 
 ```ruby
-sqoot ||= RSqoot::Client.new
-
-sqoot.deals
+SqootClient.deals
 #=> returns a list of deals
 
-sqoot.deals(query: 'travel')
+SqootClient.deals(query: 'travel')
 
-sqoot.deals(location: 'Chicago')
+SqootClient.deals(location: 'Chicago')
 
-sqoot.deals(location: 'Chicago', per_page: 10)
+SqootClient.deals(location: 'Chicago', per_page: 10)
 
-sqoot.deals(location: 'Chicago', per_page: 10, categories: 'health-beauty', page: 2)
+SqootClient.deals(location: 'Chicago', per_page: 10, categories: 'health-beauty', page: 2)
 
-sqoot.deals(price_at_least: 10, order: :commission_desc)
+SqootClient.deals(price_at_least: 10, order: :commission_desc)
 
-sqoot.impression(1555288, geometry: '250x250C')
+SqootClient.impression(1555288, geometry: '250x250C')
 # => return deal_id 1555288's image url which size is 250x250
 
-sqoot.deal(1555288).url
+SqootClient.deal(1555288).url
 # => return a click url which will redirect to another url
 
-sqoot.providers
+SqootClient.providers
 # => returns a list of providers
 
-sqoot.providers(query: 'Groupon')
+SqootClient.providers(query: 'Groupon')
 
-sqoot.categories
+SqootClient.categories
 # => returns a list of categories
 
-sqoot.categories(query: 'home')
-sqoot.categories(query: 'home&health')
-sqoot.categories(query: 'home,health')
+SqootClient.categories(query: 'home')
+SqootClient.categories(query: 'home&health')
+SqootClient.categories(query: 'home,health')
 
-sqoot.commissions
+SqootClient.commissions
 # => returns current month commissions
 
-sqoot.commissions(to: '2012-01-01', from: '2012-01-20')
-# => returns commissions using date_range :to & :from
+SqootClient.commissions(from: '2012-01-01', to: '2012-01-20')
+# => returns commissions using date_range :from & :to
 
-sqoot.clicks
+SqootClient.clicks
 # => returns real-time clicks from the event request limit of 1000
 
-sqoot.clicks(to: '2012-01-01', from: '2012-01-20')
-# => returns clicks using date_range :to & :from
+SqootClient.clicks(from: '2012-01-01', to: '2012-01-20')
+# => returns clicks using date_range :from & :to
 ```
 
 #### Auto Cache
@@ -104,7 +102,7 @@ Please notice that each query with above methods will automaticlly cache the res
 If you want to fetch the newest records each time, you can do as below:
 
 ```ruby
-sqoot.deals(location: 'Chicago', expired_in: 1.second)
+SqootClient.deals(location: 'Chicago', expired_in: 1.second)
 ```
 
 By this, it will update the cache by each query.
@@ -112,13 +110,13 @@ By this, it will update the cache by each query.
 #### Auto increment for deals
 
 ```ruby
-sqoot.total_sqoot_deals(query: 'Home', page: 2, category_slugs: 'US')
+SqootClient.total_sqoot_deals(query: 'Home', page: 2, category_slugs: 'US')
 # For this method, it will cache all the pages for current query options, the more you query the more it will store until reach the end.
 
 # For example:
-sqoot.total_sqoot_deals(query: 'Home', page: 1, per_page: 20, category_slugs: 'US').count
+SqootClient.total_sqoot_deals(query: 'Home', page: 1, per_page: 20, category_slugs: 'US').count
 # => 20 records
-sqoot.total_sqoot_deals(query: 'Home', page: 2, per_page: 20, category_slugs: 'US').count
+SqootClient.total_sqoot_deals(query: 'Home', page: 2, per_page: 20, category_slugs: 'US').count
 # => 40 records
 
 # But once you change your query options, it will re-cache the records.
