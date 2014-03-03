@@ -1,3 +1,4 @@
+require "singleton"
 require "rsqoot/helper"
 require "rsqoot/merchant"
 require "rsqoot/category"
@@ -10,6 +11,7 @@ require "rsqoot/logger"
 
 module RSqoot
   class Client
+    include Singleton
     include Helper
     include Category
     include Click
@@ -20,7 +22,14 @@ module RSqoot
     include Request
     include Logger
 
-    attr_reader :public_api_key, :private_api_key, :base_api_url, :authentication_method, :read_timeout, :query_options, :expired_in, :sqoot_query_uri
+    attr_accessor :public_api_key,
+                  :private_api_key,
+                  :base_api_url,
+                  :authentication_method,
+                  :read_timeout,
+                  :query_options,
+                  :expired_in,
+                  :sqoot_query_uri
 
     def initialize(options={})
       @public_api_key        = options[:public_api_key]        || RSqoot.public_api_key
@@ -31,5 +40,9 @@ module RSqoot
       @expired_in            = options[:expired_in]            || RSqoot.expired_in
     end
 
+    def reload!(options={})
+      initialize(options)
+      self.class.instance
+    end
   end
 end
