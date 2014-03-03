@@ -22,4 +22,7 @@ Gem::Specification.new do |s|
   s.add_dependency "json", ">= 1.6.0"
   s.add_dependency "activesupport", ">= 3.0.0"
 
+  s.add_development_dependency 'bundler', ['>= 1.0.0']
+  s.add_development_dependency 'rake', ['>= 0']
+
 end
