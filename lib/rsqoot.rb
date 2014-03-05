@@ -1,5 +1,6 @@
 require "active_support/core_ext"
 require "rsqoot/client"
+require "rsqoot/logger"
 
 module RSqoot
 
@@ -38,5 +39,5 @@ begin
   RSqoot.load_defaults
   SqootClient ||= RSqoot::Client.instance
 rescue => e
-  raise e
+  RSqoot::Logger.logger error: e
 end
