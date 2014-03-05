@@ -37,5 +37,7 @@ module RSqoot
         end
       end
     end
+
+    module_function :logger
   end
 end
