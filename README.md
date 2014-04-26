@@ -1,4 +1,4 @@
-RSqoot
+RSqoot [![Build Status](https://travis-ci.org/lyfeyaj/rsqoot.svg?branch=master)](https://travis-ci.org/lyfeyaj/rsqoot)
 ======
 
 A Ruby Wrapper for [Sqoot](http://www.sqoot.com) [API V2](http://docs.sqoot.com/v2/overview.html). With Auto-caching for all APIS, and Auto-increment for deals.
