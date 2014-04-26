@@ -3,7 +3,7 @@ module RSqoot
     # Retrieve a list of providers base on the following parameters
     #
     # @return [RSqoot::SqootProvider]
-    def providers(options={})
+    def providers(options = {})
       options = update_by_expire_time options
       query = options.delete(:query)
       if providers_not_latest?(options)
@@ -11,9 +11,8 @@ module RSqoot
         @rsqoot_providers = @rsqoot_providers.providers.map(&:provider) if @rsqoot_providers
       end
       result = query.present? ? query_providers(query) : @rsqoot_providers
-      logger({uri: sqoot_query_uri, records: result, type: 'providers', opts: options})
+      logger(uri: sqoot_query_uri, records: result, type: 'providers', opts: options)
       result
     end
-
   end
 end

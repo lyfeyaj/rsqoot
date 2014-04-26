@@ -130,3 +130,16 @@ SqootClient.total_sqoot_deals(query: 'Home', page: 2, per_page: 20, category_slu
 3. Commit your changes (`git commit -am 'Added some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+## LICENCE
+
+MIT
+
+## Author
+
+[Felix Liu](https://github.com/lyfeyaj)
+
+## TODO
+
++ Add fully test specs
++ Use memcached to cache records

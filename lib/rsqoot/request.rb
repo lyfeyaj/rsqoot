@@ -15,7 +15,7 @@ module RSqoot
         @query_options = result.query
         result
       rescue => e
-        logger({error: e})
+        logger(error: e)
         nil
       end
     end
@@ -25,16 +25,16 @@ module RSqoot
     #
     def url_generator(path, opts = {}, require_key = false)
       uri      = URI.parse base_api_url
-      headers  = {read_timeout: read_timeout}
+      headers  = { read_timeout: read_timeout }
       uri.path = '/v2/' + path
       query    = options_parser opts
       endpoint = path.split('/')[0]
       case authentication_method
       when :header
-        headers.merge! h = {"Authorization" => "api_key #{api_key(endpoint)}"}
-        query = query + "&api_key=#{api_key(endpoint)}" if require_key
+        headers.merge! 'Authorization' => "api_key #{api_key(endpoint)}"
+        query += "&api_key=#{api_key(endpoint)}" if require_key
       when :parameter
-        query = query + "&api_key=#{api_key(endpoint)}"
+        query += "&api_key=#{api_key(endpoint)}"
       end
       uri.query = query
       @sqoot_query_uri = uri
@@ -56,13 +56,13 @@ module RSqoot
     end
 
     # Decide which api key should be used: private, public
-    def api_key(endpoint='')
+    def api_key(endpoint = '')
       if private_endpoints.include? endpoint
         private_api_key
       elsif public_endpoints.include? endpoint
         public_api_key
       else
-        raise "No such endpoint #{endpoint} available."
+        fail "No such endpoint #{endpoint} available."
       end
     end
 
@@ -76,6 +76,5 @@ module RSqoot
       end.join('&')
       URI.encode query
     end
-
   end
 end

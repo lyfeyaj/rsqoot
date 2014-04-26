@@ -6,15 +6,14 @@ module RSqoot
     # @param [String] id (The merchant's ID, Use the Sqoot ID or ID for any supported namespace. Must supply namespace if we don't use Sqoot)
     # @param [String] namespace (One of the supported namespaces. Factual, Foursquare, Facebook, Google, CitySearch, Yelp.)
 
-    def merchant(id, options={})
+    def merchant(id, options = {})
       options = update_by_expire_time options
       if merchant_not_latest?(id)
         @rsqoot_merchant = get("merchants/#{id}", options, SqootMerchant)
         @rsqoot_merchant = @rsqoot_merchant.merchant if @rsqoot_merchant
       end
-      logger({uri: sqoot_query_uri, records: [@rsqoot_merchant], type: 'merchants', opts: options})
+      logger(uri: sqoot_query_uri, records: [@rsqoot_merchant], type: 'merchants', opts: options)
       @rsqoot_merchant
     end
-
   end
 end

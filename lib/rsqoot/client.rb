@@ -1,13 +1,13 @@
-require "singleton"
-require "rsqoot/helper"
-require "rsqoot/merchant"
-require "rsqoot/category"
-require "rsqoot/provider"
-require "rsqoot/commission"
-require "rsqoot/click"
-require "rsqoot/deal"
-require "rsqoot/request"
-require "rsqoot/logger"
+require 'singleton'
+require 'rsqoot/helper'
+require 'rsqoot/merchant'
+require 'rsqoot/category'
+require 'rsqoot/provider'
+require 'rsqoot/commission'
+require 'rsqoot/click'
+require 'rsqoot/deal'
+require 'rsqoot/request'
+require 'rsqoot/logger'
 
 module RSqoot
   class Client
@@ -31,7 +31,7 @@ module RSqoot
                 :expired_in,
                 :sqoot_query_uri
 
-    def initialize(options={})
+    def initialize(options = {})
       @public_api_key        = options[:public_api_key]        || RSqoot.public_api_key
       @private_api_key       = options[:private_api_key]       || RSqoot.private_api_key
       @base_api_url          = options[:base_api_url]          || RSqoot.base_api_url
@@ -40,7 +40,7 @@ module RSqoot
       @expired_in            = options[:expired_in]            || RSqoot.expired_in
     end
 
-    def reload!(options={})
+    def reload!(options = {})
       initialize(options)
       self.class.instance
     end

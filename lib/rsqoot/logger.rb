@@ -5,7 +5,7 @@ module RSqoot
     # Output errors and valid records count
     # TODO add color support
     #
-    def logger(options = {records: [], uri: '', error: '', type: '', opts: {}})
+    def logger(options = { records: [], uri: '', error: '', type: '', opts: {} })
       records = options[:records].nil? ? [] : options[:records]
       error   = options[:error]
       uri     = options[:uri]
@@ -24,16 +24,16 @@ module RSqoot
       else
         if error.present?
           puts ">>> Error: #{error}"
-          puts ""
+          puts ''
         else
           puts ">>> Querying Sqoot API V2: #{type}"
-          puts ""
+          puts ''
           puts ">>> #{uri}"
-          puts ""
+          puts ''
           puts ">>> #{opts}"
-          puts ""
+          puts ''
           puts ">>> Hit #{records.count} records"
-          puts ""
+          puts ''
         end
       end
     end

@@ -7,15 +7,14 @@ module RSqoot
     # @param [String] :from End date
     #
     # @return [RSqoot::SqootCommission]
-    def commissions(options={})
+    def commissions(options = {})
       options = update_by_expire_time options
       if commissions_not_latest?(options)
         @rsqoot_commissions = get('commissions', options, SqootCommission)
         @rsqoot_commissions = @rsqoot_commissions.commissions if @rsqoot_commissions
       end
-      logger({uri: sqoot_query_uri, records: @rsqoot_commissions, type: 'commissions', opts: options})
+      logger(uri: sqoot_query_uri, records: @rsqoot_commissions, type: 'commissions', opts: options)
       @rsqoot_commissions
     end
-
   end
 end

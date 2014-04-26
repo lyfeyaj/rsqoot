@@ -1,5 +1,6 @@
 module RSqoot
   module Deal
+
     # Retrieve a list of deals based on the following parameters
     #
     # @param [String] query (Search deals by title, description, fine print, merchant name, provider, and category.)
@@ -8,32 +9,32 @@ module RSqoot
     # @param [Integer] page (Which page of result to return. Default to 1.)
     # @param [Integer] per_page (Number of results to return at once. Defaults to 10.)
     #
-    def deals(options={})
+    def deals(options = {})
       options = update_by_expire_time options
       if deals_not_latest?(options)
         uniq = !!options.delete(:uniq)
         @rsqoot_deals = get('deals', options, SqootDeal) || []
-        @rsqoot_deals = @rsqoot_deals.deals.map(&:deal) if !@rsqoot_deals.empty?
+        @rsqoot_deals = @rsqoot_deals.deals.map(&:deal) unless @rsqoot_deals.empty?
         @rsqoot_deals = uniq_deals(@rsqoot_deals) if uniq
       end
-      logger({uri: sqoot_query_uri, records: @rsqoot_deals, type: 'deals', opts: options})
+      logger(uri: sqoot_query_uri, records: @rsqoot_deals, type: 'deals', opts: options)
       @rsqoot_deals
     end
 
     # Retrieve a deal by id
     #
-    def deal(id, options={})
+    def deal(id, options = {})
       options = update_by_expire_time options
       if deal_not_latest?(id)
         @rsqoot_deal = get("deals/#{id}", options, SqootDeal)
         @rsqoot_deal = @rsqoot_deal.deal if @rsqoot_deal
       end
-      logger({uri: sqoot_query_uri, records: [@rsqoot_deal], type: 'deal', opts: options})
+      logger(uri: sqoot_query_uri, records: [@rsqoot_deal], type: 'deal', opts: options)
       @rsqoot_deal
     end
 
-    def impression(deal_id, options={})
-      url_generator("deals/#{deal_id}/image", options, require_key = true).first.to_s
+    def impression(deal_id, options = {})
+      url_generator("deals/#{deal_id}/image", options, true).first.to_s
     end
 
     # Auto Increment for deals query.
@@ -42,7 +43,7 @@ module RSqoot
       @cached_pages ||= []
       page = options[:page] || 1
       check_query_change options
-      if !page_cached? page
+      unless page_cached? page
         @total_deals += deals(options)
         @total_deals.uniq!
         @cached_pages << page.to_s
@@ -63,9 +64,7 @@ module RSqoot
       titles = deals.map(&:title).uniq
       titles.map do |title|
         deals.map do |deal|
-          if deal.try(:title) == title
-            deal
-          end
+          deal if deal.try(:title) == title
         end.compact.last
       end.flatten
     end
@@ -96,6 +95,5 @@ module RSqoot
     def page_cached?(page = 1)
       cached_pages.include? page.to_s
     end
-
   end
 end
