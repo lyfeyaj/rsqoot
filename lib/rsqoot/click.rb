@@ -12,6 +12,7 @@ module RSqoot
       if clicks_not_latest?(options)
         @rsqoot_clicks = get('clicks', options, SqootClick)
         @rsqoot_clicks = @rsqoot_clicks.clicks if @rsqoot_clicks
+        @rsqoot_clicks = @rsqoot_clicks.clicks.map(&:click) if @rsqoot_clicks.clicks
       end
       logger(uri: sqoot_query_uri, records: @rsqoot_clicks, type: 'clicks', opts: options)
       @rsqoot_clicks

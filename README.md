@@ -85,13 +85,13 @@ SqootClient.categories(query: 'home,health')
 SqootClient.commissions
 # => returns current month commissions
 
-SqootClient.commissions(from: '2012-01-01', to: '2012-01-20')
+SqootClient.commissions(from: '2014-01-01', to: '2014-01-20')
 # => returns commissions using date_range :from & :to
 
 SqootClient.clicks
 # => returns real-time clicks from the event request limit of 1000
 
-SqootClient.clicks(from: '2012-01-01', to: '2012-01-20')
+SqootClient.clicks(from: '2014-01-01', to: '2014-01-20')
 # => returns clicks using date_range :from & :to
 ```
 
